@@ -15,7 +15,7 @@ public class MovieController : ControllerBase
     {
         _httpClient = httpClientFactory.CreateClient();
         _config = config;
-        _bearerToken = _config["TMDb:BearerToken"]; // Ajoute dans appsettings.json
+        _bearerToken = _config["TMDb:BearerToken"];; // Ajoute dans appsettings.json
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _bearerToken);
     }
 

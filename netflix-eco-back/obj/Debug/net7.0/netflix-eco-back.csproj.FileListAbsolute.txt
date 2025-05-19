@@ -17,15 +17,9 @@ C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-e
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.csproj.CoreCompileInputs.cache
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets\msbuild.netflix-eco-back.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets\msbuild.build.netflix-eco-back.props
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.netflix-eco-back.props
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.netflix-eco-back.props
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets.pack.json
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\scopedcss\bundle\netflix-eco-back.styles.css
-C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.csproj.CopyComplete
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.dll
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\refint\netflix-eco-back.dll
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.pdb
@@ -51,3 +45,8 @@ C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\bin\Debug\net7.0\System.Te
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\bin\Debug\net7.0\System.Text.Json.dll
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\bin\Debug\net7.0\YamlDotNet.dll
 C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\bin\Debug\net7.0\runtimes\browser\lib\net7.0\System.Text.Encodings.Web.dll
+C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\bin\Debug\net7.0\netflix-eco-back.staticwebassets.endpoints.json
+C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-eco-back.sourcelink.json
+C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets.build.json.cache
+C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\staticwebassets.build.endpoints.json
+C:\Users\alexi\Documents\netflix-eco\netflix-eco-back\obj\Debug\net7.0\netflix-.51A9BDAC.Up2Date

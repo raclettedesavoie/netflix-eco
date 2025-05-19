@@ -43,3 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/netflix-eco-back/appsettings.json
+/netflix-eco-back/bin
