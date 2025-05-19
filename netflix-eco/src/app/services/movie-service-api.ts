@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // movie-service-api.ts
 export interface IMovieApiClient {
   search(query?: string, type?: string): Promise<void>;
@@ -42,9 +43,7 @@ export class MovieApiClient implements IMovieApiClient {
 
     if (!response.ok) throw await handleError(response);
     const data = await response.json();
-    return Array.isArray(data)
-      ? data.map((item) => WeatherForecast.fromJS(item))
-      : [];
+    return Array.isArray(data) ? data.map((item) => WeatherForecast.fromJS(item)) : [];
   }
 }
 
@@ -55,3 +54,20 @@ export class WeatherForecast {
   summary?: string;
 
   constructor(init?: Partial<WeatherForecast>) {
+    Object.assign(this, init);
+  }
+
+  static fromJS(data: any): WeatherForecast {
+    return new WeatherForecast({
+      date: data?.date ? new Date(data.date) : undefined,
+      temperatureC: data?.temperatureC,
+      temperatureF: data?.temperatureF,
+      summary: data?.summary,
+    });
+  }
+}
+
+async function handleError(response: Response): Promise<Error> {
+  const text = await response.text();
+  return new Error(`HTTP ${response.status}: ${text}`);
+}
