@@ -1,11 +1,20 @@
+using Microsoft.AspNetCore.Builder;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); // Swashbuckle (UI)
+
+// 👉 NSwag
+builder.Services.AddOpenApiDocument(config =>
+{
+    config.Title = "Movie API";
+    config.Version = "v1";
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost",
@@ -22,18 +31,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Swashbuckle (UI classique)
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // 👉 NSwag (OpenAPI + UI alternative + générateur client)
+    app.UseOpenApi();           // Route: /swagger/v1/swagger.json
+    app.UseSwaggerUI();        // Route: /swagger
 }
 
-
-// Utilise la politique CORS ici
+// CORS
 app.UseCors("AllowLocalhost");
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
