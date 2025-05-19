@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "P3kKMkrORBr2TriW5l7zWc8LzXfxxfx9E+2i67efMyM=",
+  "Source": "netflix-eco-back",
+  "BasePath": "_content/netflix-eco-back",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

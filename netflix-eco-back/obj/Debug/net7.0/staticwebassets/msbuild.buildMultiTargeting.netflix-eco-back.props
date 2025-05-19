@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\netflix-eco-back.props" />
+</Project>
