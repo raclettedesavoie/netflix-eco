@@ -31,6 +31,9 @@ builder.Services.AddCors(options =>
         });
 });
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7238";
+builder.WebHost.UseUrls($"http://+:{port}");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,7 +51,10 @@ if (app.Environment.IsDevelopment())
 // CORS
 app.UseCors("AllowLocalhost");
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

@@ -17,7 +17,7 @@ COPY --from=build /app/publish .
 
 # Exposer le port dynamique
 ENV ASPNETCORE_URLS=http://+:${PORT}
-EXPOSE ${PORT}
+EXPOSE 80
 
 # Démarrer l'application
 ENTRYPOINT ["dotnet", "netflix-eco-back.dll"]
