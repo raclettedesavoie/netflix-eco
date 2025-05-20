@@ -29,7 +29,6 @@ export default function SeriesResults({
       type: r.type,
     };
   });
-  console.log('serie-results', seriesWithDetails);
   return (
     <>
       {seriesWithDetails.length > 0 && (

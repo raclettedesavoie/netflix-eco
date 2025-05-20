@@ -47,7 +47,6 @@ export function SerieCard({
           type="button"
           onClick={() => {
             openModal(serie);
-            console.log(selectedSerie);
           }}
           className="w-full text-left cursor-pointer overflow-hidden "
         >

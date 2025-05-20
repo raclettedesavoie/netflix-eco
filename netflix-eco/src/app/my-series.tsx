@@ -9,7 +9,6 @@ interface MySeriesProps {
 
 export default function MySeries({ mySeries, setMySeries }: Readonly<MySeriesProps>) {
   const [selectedSerie, setSelectedSerie] = useState<SerieBase | null>(null);
-  console.log('mySeries', mySeries);
   return (
     <>
       {mySeries.length > 0 && (

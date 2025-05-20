@@ -16,6 +16,9 @@
 **/.next/
 **/bin/
 
+bin/
+obj/
+
 # testing
 /coverage
 

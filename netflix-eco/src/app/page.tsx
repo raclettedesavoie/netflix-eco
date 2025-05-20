@@ -5,6 +5,7 @@ import Header from './header';
 import SeriesResults from './series-results';
 import MySeries from './my-series';
 import { SearchResult, SerieBase, SerieDetails } from './shared/types';
+import { API_BASE_URL } from './shared/const';
 
 export default function SeriesSearch() {
   const [query, setQuery] = useState('');
@@ -24,10 +25,8 @@ export default function SeriesSearch() {
 
       // Requêtes TV et Movie en parallèle
       const [tvRes, movieRes] = await Promise.all([
-        fetch(`https://localhost:7238/api/Movie/search?query=${encodeURIComponent(query)}&type=tv`),
-        fetch(
-          `https://localhost:7238/api/Movie/search?query=${encodeURIComponent(query)}&type=movie`
-        ),
+        fetch(`${API_BASE_URL}/api/Movie/search?query=${encodeURIComponent(query)}&type=tv`),
+        fetch(`${API_BASE_URL}/api/Movie/search?query=${encodeURIComponent(query)}&type=movie`),
       ]);
 
       if (!tvRes.ok || !movieRes.ok) throw new Error('Erreur lors de la recherche');
@@ -62,13 +61,10 @@ export default function SeriesSearch() {
         .slice(0, 3);
 
       setResults(sortedResults);
-      console.log(sortedResults);
 
       const detailsList = await Promise.all(
         sortedResults.map(async (item) => {
-          const res = await fetch(
-            `https://localhost:7238/api/Movie/details/${item.id}?type=${item.type}`
-          );
+          const res = await fetch(`${API_BASE_URL}/api/Movie/details/${item.id}?type=${item.type}`);
           if (!res.ok)
             throw new Error(`Erreur lors de la récupération des détails pour id=${item.id}`);
           return await res.json();
@@ -76,7 +72,6 @@ export default function SeriesSearch() {
       );
 
       setSerieDetails(detailsList);
-      console.log(detailsList);
 
       setView('searchResults');
     } catch (e: any) {
