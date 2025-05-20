@@ -14,6 +14,7 @@ export interface SearchResult {
 export interface SerieDetails {
   id: number;
   next_episode_to_air?: {
+    id:number ;
     air_date: string;
     episode_number: number;
     season_number: number;
@@ -21,7 +22,8 @@ export interface SerieDetails {
 }
 
 export interface SerieBase {
-  id: number;
+  id: number|null;
+  serieId: number;
   name: string;
   first_air_date: string;
   poster_path?: string | null;
@@ -33,17 +35,8 @@ export interface SerieBase {
 }
 
 export interface NextEpisode {
+  next_episode_id:number | null;
   air_date: string;
   episode_number: number;
   season_number: number;
-}
-
-export interface SerieDetails {
-  id: number;
-  name: string;
-  next_episode_to_air?: {
-    air_date: string;
-    episode_number: number;
-    season_number: number;
-  } | null;
 }

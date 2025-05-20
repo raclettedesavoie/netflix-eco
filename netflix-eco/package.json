@@ -5,6 +5,7 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "dev": "next dev",
+    "generate-api": "nswag run src/nswag/nswag.json",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

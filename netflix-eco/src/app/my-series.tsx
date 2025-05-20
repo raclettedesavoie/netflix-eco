@@ -15,7 +15,7 @@ export default function MySeries({ mySeries, setMySeries }: Readonly<MySeriesPro
         <ul className="flex flex-wrap justify-center gap-6 p-4 w-full">
           {mySeries.map((serie) => (
             <SerieCard
-              key={serie.id}
+              key={serie.serieId}
               serie={serie}
               mySeries={mySeries}
               setMySeries={setMySeries}

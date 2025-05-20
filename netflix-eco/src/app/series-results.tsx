@@ -19,11 +19,18 @@ export default function SeriesResults({
   const seriesWithDetails: SerieBase[] = results.map((r) => {
     const details = serieDetails?.find((d) => d.id === r.id);
     return {
-      id: r.id,
+      id: 0,
+      serieId: r.id,
       name: r.name,
       first_air_date: r.first_air_date,
       poster_path: r.poster_path,
-      next_episode_to_air: details?.next_episode_to_air ?? null,
+      next_episode_to_air: details?.next_episode_to_air
+        ? {
+            ...details?.next_episode_to_air,
+            next_episode_id: details?.next_episode_to_air?.id,
+            id: 0,
+          }
+        : null,
       overview: r.overview,
       original_language: r.original_language,
       type: r.type,
@@ -35,7 +42,7 @@ export default function SeriesResults({
         <ul className="flex flex-wrap justify-center gap-6 p-4 w-full">
           {seriesWithDetails.map((serie) => (
             <SerieCard
-              key={serie.id}
+              key={serie.serieId}
               serie={serie}
               mySeries={mySeries}
               setMySeries={setMySeries}

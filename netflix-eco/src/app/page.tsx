@@ -1,6 +1,6 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './header';
 import SeriesResults from './series-results';
 import MySeries from './my-series';
@@ -16,6 +16,19 @@ export default function SeriesSearch() {
   const [mySeries, setMySeries] = useState<SerieBase[]>([]);
   const [view, setView] = useState<'mySeries' | 'searchResults'>('mySeries');
 
+  const fetchMySeries = async () => {
+    const res = await fetch(`${API_BASE_URL}/api/UserSeries`);
+
+    if (!res.ok) {
+      throw new Error('Erreur lors du chargement des séries');
+    }
+
+    const data: SerieBase[] = await res.json();
+    setMySeries(data);
+  };
+  useEffect(() => {
+    fetchMySeries().catch(console.error);
+  }, []);
   const handleSearch = async () => {
     try {
       setLoadingSearch(true);
@@ -36,8 +49,11 @@ export default function SeriesSearch() {
 
       // Fusion des résultats
       const merged: SearchResult[] = [
-        ...(tvJson.results ?? []).map((item: SearchResult) => ({ ...item, type: 'tv' })),
-        ...(movieJson.results ?? []).map((item: SearchResult) => ({
+        ...((tvJson.results as SearchResult[]) ?? []).map((item: SearchResult) => ({
+          ...item,
+          type: 'tv',
+        })),
+        ...((movieJson.results as SearchResult[]) ?? []).map((item: SearchResult) => ({
           ...item,
           type: 'movie',
           name: item.title,
@@ -62,7 +78,7 @@ export default function SeriesSearch() {
 
       setResults(sortedResults);
 
-      const detailsList = await Promise.all(
+      const detailsList: SerieDetails[] = await Promise.all(
         sortedResults.map(async (item) => {
           const res = await fetch(`${API_BASE_URL}/api/Movie/details/${item.id}?type=${item.type}`);
           if (!res.ok)
@@ -72,6 +88,7 @@ export default function SeriesSearch() {
       );
 
       setSerieDetails(detailsList);
+      console.log('eza', detailsList);
 
       setView('searchResults');
     } catch (e: any) {
@@ -87,6 +104,7 @@ export default function SeriesSearch() {
     setSerieDetails(null);
     setError(null);
     setQuery('');
+    fetchMySeries();
   };
 
   return (

@@ -2,50 +2,53 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-[ApiController]
-[Route("api/[controller]")]
-public class MovieController : ControllerBase
+namespace netflix_eco_back.Controllers
 {
-    private readonly HttpClient _httpClient;
-    private readonly IConfiguration _config;
-    private readonly string _baseUrl = "https://api.themoviedb.org/3";
-    private readonly string _bearerToken;
-
-    public MovieController(IHttpClientFactory httpClientFactory, IConfiguration config)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class MovieController : ControllerBase
     {
-        _httpClient = httpClientFactory.CreateClient();
-        _config = config;
-        _bearerToken = _config["TMDb:BearerToken"];; // Ajoute dans appsettings.json
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _bearerToken);
-    }
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _config;
+        private readonly string _baseUrl = "https://api.themoviedb.org/3";
+        private readonly string _bearerToken;
 
-    // GET api/movie/search?query=inception&type=movie
-    [HttpGet("search")]
-    public async Task<IActionResult> Search([FromQuery] string query, [FromQuery] string type = "movie")
-    {
-        if (string.IsNullOrWhiteSpace(query)) return BadRequest("Query is required.");
+        public MovieController(IHttpClientFactory httpClientFactory, IConfiguration config)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _config = config;
+            _bearerToken = _config["TMDb:BearerToken"]; ; // Ajoute dans appsettings.json
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _bearerToken);
+        }
 
-        var url = $"{_baseUrl}/search/{type}?query={Uri.EscapeDataString(query)}&language=fr-FR";
+        // GET api/movie/search?query=inception&type=movie
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] string query, [FromQuery] string type = "movie")
+        {
+            if (string.IsNullOrWhiteSpace(query)) return BadRequest("Query is required.");
 
-        var response = await _httpClient.GetAsync(url);
-        if (!response.IsSuccessStatusCode) return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+            var url = $"{_baseUrl}/search/{type}?query={Uri.EscapeDataString(query)}&language=fr-FR";
 
-        var content = await response.Content.ReadAsStringAsync();
-        var json = JsonSerializer.Deserialize<JsonElement>(content);
-        return Ok(json);
-    }
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode) return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
 
-    // GET api/movie/details/11?type=movie
-    [HttpGet("details/{id}")]
-    public async Task<IActionResult> GetDetails([FromRoute] int id, [FromQuery] string type = "movie")
-    {
-        var url = $"{_baseUrl}/{type}/{id}?language=fr-FR";
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonSerializer.Deserialize<JsonElement>(content);
+            return Ok(json);
+        }
 
-        var response = await _httpClient.GetAsync(url);
-        if (!response.IsSuccessStatusCode) return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+        // GET api/movie/details/11?type=movie
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetDetails([FromRoute] int id, [FromQuery] string type = "movie")
+        {
+            var url = $"{_baseUrl}/{type}/{id}?language=fr-FR";
 
-        var content = await response.Content.ReadAsStringAsync();
-        var json = JsonSerializer.Deserialize<JsonElement>(content);
-        return Ok(json);
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode) return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonSerializer.Deserialize<JsonElement>(content);
+            return Ok(json);
+        }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("netflix-eco-back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5b361fd2c1b8a99e9ee8030adfe851e68e22fbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c96b5786e5eabeafae4821172d025a4210189ebd")]
 [assembly: System.Reflection.AssemblyProductAttribute("netflix-eco-back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("netflix-eco-back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

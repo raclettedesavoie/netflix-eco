@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: sqlserver-db
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    ports:
+      - 1433

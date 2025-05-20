@@ -2,6 +2,7 @@
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { InlineModal } from './shared/modal';
 import { SerieBase } from './shared/types';
+import { API_BASE_URL } from './shared/const';
 
 interface SerieCardProps {
   serie: SerieBase;
@@ -23,25 +24,37 @@ export function SerieCard({
   const openModal = (serie: SerieBase) => onSelect(serie);
   const closeModal = () => onSelect(null);
 
-  const isInMySeries = mySeries.some((s) => s.id === serie.id);
-
+  const isInMySeries = mySeries.some((s) => s.serieId === serie.serieId);
   const formatNextAir = () => {
     if (!serie.next_episode_to_air?.air_date) return 'Aucune date disponible';
     return new Date(serie.next_episode_to_air.air_date).toLocaleDateString();
   };
 
   const removeSerie = () => {
-    setMySeries((prev) => prev.filter((s) => s.id !== serie.id));
+    setMySeries((prev) => prev.filter((s) => s.serieId !== serie.serieId));
   };
 
-  const addSerie = () => {
-    debugger;
+  const addSerie = async () => {
     if (isInMySeries) return;
-    setMySeries((prev) => [...prev, serie]);
-  };
 
+    try {
+      // Appel API pour mettre à jour la série
+      await fetch(`${API_BASE_URL}/api/UserSeries`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(serie), // le corps JSON avec les données à envoyer
+      });
+      // Si OK, on met à jour localement le state React
+      setMySeries((prev) => [...prev, serie]);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la série :', error);
+      // Optionnel : afficher un message d’erreur à l’utilisateur
+    }
+  };
   return (
-    <li key={serie.id} className="w-[254px] relative">
+    <li key={serie.serieId} className="w-[254px] relative">
       <div className="cursor-pointer w-64 hover:shadow-lg rounded overflow-hidden border relative overflow-visible ">
         <button
           type="button"
@@ -97,7 +110,7 @@ export function SerieCard({
           </div>
         </button>
       </div>
-      {selectedSerie && selectedSerie.id == serie.id && (
+      {selectedSerie && selectedSerie.serieId == serie.serieId && (
         <InlineModal isOpen={!!selectedSerie} onClose={closeModal} title={selectedSerie.name}>
           <p>Langue : {selectedSerie.original_language}</p>
           <p>{selectedSerie.overview}</p>
