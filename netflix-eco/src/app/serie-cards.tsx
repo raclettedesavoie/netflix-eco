@@ -30,7 +30,13 @@ export function SerieCard({
     return new Date(serie.next_episode_to_air.air_date).toLocaleDateString();
   };
 
-  const removeSerie = () => {
+  const removeSerie = async () => {
+    await fetch(`${API_BASE_URL}/api/UserSeries/${serie.serieId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     setMySeries((prev) => prev.filter((s) => s.serieId !== serie.serieId));
   };
 

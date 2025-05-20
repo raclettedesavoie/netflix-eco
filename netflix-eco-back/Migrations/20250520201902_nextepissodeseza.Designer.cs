@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace netflix_eco_back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250520201902_nextepissodeseza")]
+    partial class nextepissodeseza
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +23,37 @@ namespace netflix_eco_back.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("NextEpisode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AirDate")
+                        .HasColumnType("datetime2")
+                        .HasAnnotation("Relational:JsonPropertyName", "air_date");
+
+                    b.Property<int>("EpisodeNumber")
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "episode_number");
+
+                    b.Property<int>("NextEpisodeId")
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "next_episode_id");
+
+                    b.Property<int>("SeasonNumber")
+                        .HasColumnType("int")
+                        .HasAnnotation("Relational:JsonPropertyName", "season_number");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NextEpisodes");
+
+                    b.HasAnnotation("Relational:JsonPropertyName", "next_episode_to_air");
+                });
 
             modelBuilder.Entity("SerieBase", b =>
                 {
@@ -40,6 +74,9 @@ namespace netflix_eco_back.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NextEpisodeToAirId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OriginalLanguage")
                         .IsRequired()
@@ -63,41 +100,16 @@ namespace netflix_eco_back.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NextEpisodeToAirId");
+
                     b.ToTable("Series");
                 });
 
             modelBuilder.Entity("SerieBase", b =>
                 {
-                    b.OwnsOne("NextEpisode", "NextEpisodeToAir", b1 =>
-                        {
-                            b1.Property<int>("SerieBaseId")
-                                .HasColumnType("int");
-
-                            b1.Property<DateTime>("AirDate")
-                                .HasColumnType("datetime2")
-                                .HasAnnotation("Relational:JsonPropertyName", "air_date");
-
-                            b1.Property<int>("EpisodeNumber")
-                                .HasColumnType("int")
-                                .HasAnnotation("Relational:JsonPropertyName", "episode_number");
-
-                            b1.Property<int>("NextEpisodeId")
-                                .HasColumnType("int")
-                                .HasAnnotation("Relational:JsonPropertyName", "next_episode_id");
-
-                            b1.Property<int>("SeasonNumber")
-                                .HasColumnType("int")
-                                .HasAnnotation("Relational:JsonPropertyName", "season_number");
-
-                            b1.HasKey("SerieBaseId");
-
-                            b1.ToTable("Series");
-
-                            b1.HasAnnotation("Relational:JsonPropertyName", "next_episode_to_air");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SerieBaseId");
-                        });
+                    b.HasOne("NextEpisode", "NextEpisodeToAir")
+                        .WithMany()
+                        .HasForeignKey("NextEpisodeToAirId");
 
                     b.Navigation("NextEpisodeToAir");
                 });

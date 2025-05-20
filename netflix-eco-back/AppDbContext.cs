@@ -7,5 +7,9 @@ public class AppDbContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SerieBase>().OwnsOne(s => s.NextEpisodeToAir);
+    }
     public DbSet<SerieBase> Series { get; set; }
 }

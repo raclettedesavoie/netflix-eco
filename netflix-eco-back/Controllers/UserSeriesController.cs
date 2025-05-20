@@ -52,7 +52,7 @@ namespace netflix_eco_back.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSerie(int id)
         {
-            var serie = await _context.Series.FindAsync(id);
+            var serie = await _context.Series.FirstOrDefaultAsync(serie=>serie.SerieId == id);
             if (serie == null)
                 return NotFound();
 

@@ -33,8 +33,7 @@ public class SerieBase
 
 public class NextEpisode
 {
-    [Key]
-    public int Id { get; set; }
+
     [JsonPropertyName("next_episode_id")]
     public int NextEpisodeId { get; set; }
 
