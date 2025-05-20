@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowLocalhost",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000","https://netflix-eco.onrender.com")
+            policy.WithOrigins("http://localhost:3000","https://netflix-eco-z8qw.onrender.com")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
