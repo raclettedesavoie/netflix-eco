@@ -36,25 +36,25 @@ builder.WebHost.UseUrls($"http://+:{port}");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// CORS : doit être avant UseAuthorization / UseRouting
+app.UseCors("AllowLocalhost");
+
+// Swagger et OpenAPI si en dev
 if (app.Environment.IsDevelopment())
 {
-    // Swashbuckle (UI classique)
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // 👉 NSwag (OpenAPI + UI alternative + générateur client)
-    app.UseOpenApi();           // Route: /swagger/v1/swagger.json
-    app.UseSwaggerUI();        // Route: /swagger
+    app.UseOpenApi(); // NSwag
+    app.UseSwaggerUI();
 }
 
-// CORS
-app.UseCors("AllowLocalhost");
-
+// Redirection HTTPS uniquement en local (Render est déjà en HTTPS)
 if (!app.Environment.IsProduction())
 {
     app.UseHttpsRedirection();
 }
+
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
