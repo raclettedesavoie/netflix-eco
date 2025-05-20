@@ -12,6 +12,18 @@
 
 /.vs
 /.vscode
+netflix-eco-back/.vs
+netflix-eco/public
+
+/public
+
+public/*
+
+/public/*
+/public*
+
+/.vs
+/.vscode
 /netflix-eco-back/.vs
 # testing
 /coverage

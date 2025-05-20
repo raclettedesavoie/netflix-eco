@@ -10,9 +10,11 @@
 !.yarn/releases
 !.yarn/versions
 
-/.vs
-/.vscode
-/netflix-eco-back/.vs
+**/.vscode
+**/.vs
+# **/public/
+**/.next/
+**/bin/
 
 # testing
 /coverage
